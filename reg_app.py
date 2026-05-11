@@ -10,9 +10,6 @@ st.set_page_config(
     layout="centered"
 )
 
-# ================= DEBUG IDENTIFIER =================
-st.success("✔ You are running: SALARY PREDICTION APP (reg_app.py)")
-
 # ================= MODEL PATH =================
 MODEL_PATH = "salary_model.pkl"
 
@@ -26,20 +23,20 @@ model = joblib.load(MODEL_PATH)
 
 # ================= UI HEADER =================
 st.title("💼 AI Salary Prediction System")
-st.write("Predict salary based on years of experience using Linear Regression.")
+st.write("Predict salary based on years of experience using Machine Learning.")
 
 st.markdown("---")
 
-# ================= INPUT SECTION =================
+# ================= INPUT SECTION (FIXED) =================
 years_experience = st.slider(
-    "Select Years of Experience",
-    min_value=0.0,
-    max_value=50.0,
-    value=5.0,
-    step=0.1
+    "Years of Experience",
+    min_value=0,
+    max_value=50,
+    value=1,
+    step=1
 )
 
-st.info(f"Selected Experience: {years_experience} years")
+st.info(f"Selected Experience: {years_experience} year(s)")
 
 # ================= PREDICTION =================
 if st.button("Predict Salary"):
@@ -51,5 +48,5 @@ if st.button("Predict Salary"):
         st.success(f"💰 Estimated Salary: ₱{prediction[0]:,.2f}")
 
     except Exception as e:
-        st.error("Prediction failed. Check your model.")
+        st.error("Prediction failed. Check your model or input.")
         st.code(str(e))
